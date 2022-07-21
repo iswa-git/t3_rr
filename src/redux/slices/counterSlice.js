@@ -18,18 +18,26 @@ const initialState = {
     "سبحان الله وبحمده سبحان الله العظيم":0,
 }
 
+const setCount= (item, value) =>{
+    sessionStorage.setItem(item, value)
+}
+
 const counterSlice = createSlice({
   name: "counter",
   initialState,
 
   reducers: {
     increment: (state, action) => {
+        var vcount = sessionStorage.getItem(action.payload)
+        setCount ([action.payload], Number(vcount) + 1)
+        
         return {
             ...state, [action.payload]:state[action.payload]+1
         }
     },
     
     reset: (state, action ) => {
+        sessionStorage.setItem([action.payload],0)
         return{
             ...state, [action.payload]:0
         }
